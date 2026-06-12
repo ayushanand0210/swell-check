@@ -12,13 +12,18 @@ every time the page opens.
 
 ## What you're looking at
 
-- **Wave-profile strip** — the week at a glance; dot colour = day rating.
+- **Spot tabs** — one tab per spot; the dot is the week's best rating.
+  Your last-viewed spot is remembered on the device.
+- **Today block** — big number = today's max swell, plus period, direction,
+  and the 6–10 AM wind. Arrows point where the swell/wind is heading.
+- **Wave-profile strip** — the week at a glance; dot colour = day rating,
+  dashed lines mark the GO (1.2 m) and OK (0.8 m) thresholds.
 - **GO** 🟢 = swell ≥ 1.2 m at ≥ 12 s from the SW window (180–280°), with a
   calm or offshore morning (wind read 6–10 AM IST; coast faces west, so
   E/NE is offshore). **OK** = rideable (≥ 0.8 m in window). **SMALL** = nope.
-- **today · hour by hour** — tap it on any card for raw hourly swell + wind.
+- **today · hour by hour** — tap it on any tab for hourly swell bars + wind.
 - Sasihitlu and Hejamadi Kodi share one Open-Meteo grid cell, so they share
-  one card (one forecast, both names).
+  one tab (one forecast, both names).
 
 ## Tuning
 

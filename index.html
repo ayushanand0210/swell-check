@@ -63,38 +63,92 @@ h1{font-size:clamp(34px,10vw,58px);font-weight:800;line-height:.98;
   .w1{transform:translateX(-21%)}
 }
 
-/* ── spot cards ───────────────────────────────────────── */
-main.wrap{padding-bottom:56px}
-.spot{background:var(--card);border:1px solid var(--line);
-  border-radius:16px;padding:18px 18px 14px;margin-top:22px}
-.spot h2{font-size:22px;font-weight:800;letter-spacing:-.01em;line-height:1.1}
+/* ── spot tabs ────────────────────────────────────────── */
+.tabbar{position:sticky;top:0;z-index:20;
+  background:rgba(236,243,240,.92);backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.tabs{max-width:680px;margin:0 auto;display:flex;gap:8px;
+  overflow-x:auto;padding:10px 16px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;display:inline-flex;align-items:center;gap:7px;
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;
+  color:var(--ink-soft);background:var(--card);
+  border:1px solid var(--line);border-radius:99px;
+  padding:8px 14px;cursor:pointer;transition:background .15s,color .15s}
+.tab:hover{border-color:var(--ink-soft)}
+.tab[aria-selected="true"]{background:var(--ink);color:#F2F8F5;
+  border-color:var(--ink);font-weight:600}
+.tdot{width:7px;height:7px;border-radius:50%;background:var(--line);flex:none}
+.tdot.go{background:#22B380}
+.tdot.ok{background:#D9A93C}
+.tdot.small{background:#9FB4AF}
+.tdot.err{background:var(--laterite)}
+
+/* ── spot panels ──────────────────────────────────────── */
+main.wrap{padding-top:18px;padding-bottom:56px}
+.panel[hidden]{display:none}
+.panel h2{font-size:22px;font-weight:800;letter-spacing:-.01em;line-height:1.1}
 .also{display:block;font-size:14px;font-weight:600;color:var(--ink-soft);
   margin-top:3px}
 .coords{font-family:"IBM Plex Mono",monospace;font-size:11px;
   color:var(--ink-soft);margin-top:4px}
-.profile{margin:14px 0 6px;display:block;width:100%}
-.rows{border-top:1px solid var(--line)}
-.row{display:flex;align-items:baseline;gap:8px;padding:9px 2px;
-  border-bottom:1px solid var(--line);
-  font-family:"IBM Plex Mono",monospace;font-size:13px}
-.row .d{width:36px;font-weight:600}
-.row .stat{flex:1;min-width:0;white-space:nowrap;
-  overflow:hidden;text-overflow:ellipsis}
-.row .stat::before,.row .wind::before{content:"· ";color:var(--line)}
-.row .wind{color:var(--ink-soft);font-size:12px;white-space:nowrap}
+.arr{width:13px;height:13px;display:inline-block;vertical-align:-2px;
+  fill:currentColor;transform-origin:center;transform-box:border-box}
+
+/* today feature block */
+.now{background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:14px 16px 12px;margin-top:14px}
+.now-cap{font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.now-row{display:flex;align-items:center;gap:14px;margin-top:6px}
+.now-big{font-size:46px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.now-big small{font-size:18px;font-weight:600;color:var(--ink-soft)}
+.now-meta{flex:1;display:flex;flex-direction:column;gap:4px;
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink-soft)}
+.now-meta .arr{width:14px;height:14px}
+.now-meta .off{color:var(--go)}
+.now-badge{font-size:13px;padding:5px 13px}
+
+/* wave profile chart */
+.profile{margin:16px 0 4px;display:block;width:100%}
+
+/* seven day rows */
+.rows{border-top:1px solid var(--line);margin-top:8px}
+.row{display:grid;align-items:center;
+  grid-template-columns:34px 56px 44px 1fr 62px auto;gap:8px;
+  padding:9px 2px;border-bottom:1px solid var(--line);
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px}
+.row .d{font-weight:600}
+.row .hv{font-size:15px;font-weight:600}
+.row .hv small{font-size:10px;font-weight:500;color:var(--ink-soft)}
+.row .pv{color:var(--ink-soft)}
+.row .dirv{color:var(--ink-soft);white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis}
+.row .windv{color:var(--ink-soft);white-space:nowrap;text-align:right}
+.row .windv.off{color:var(--go)}
+.row .windv.on{color:#A4502F}
 .badge{font-family:"IBM Plex Mono",monospace;font-size:11px;
-  font-weight:600;padding:2px 9px;border-radius:99px;white-space:nowrap}
+  font-weight:600;padding:2px 9px;border-radius:99px;white-space:nowrap;
+  justify-self:end}
 .b-go{background:var(--go-bg);color:var(--go)}
 .b-ok{background:var(--ok-bg);color:var(--ok)}
 .b-small{background:var(--small-bg);color:var(--small)}
 .best{font-size:15px;margin-top:12px}
 .best b{color:var(--go)}
+
+/* hourly toggle */
 .today{margin-top:10px;font-family:"IBM Plex Mono",monospace;font-size:12px}
 .today summary{cursor:pointer;color:var(--laterite);font-weight:500;
   letter-spacing:.03em;padding:4px 0;user-select:none}
-.hrow{display:flex;gap:8px;padding:5px 2px;color:var(--ink-soft);
+.hrow{display:grid;grid-template-columns:34px 1fr 86px 76px;gap:8px;
+  align-items:center;padding:4px 2px;color:var(--ink-soft);
   border-bottom:1px dashed var(--line)}
-.hrow .hh{width:34px;color:var(--ink);font-weight:500}
+.hrow .hh{color:var(--ink);font-weight:500}
+.hbar{height:6px;border-radius:99px;background:var(--small-bg);
+  overflow:hidden}
+.hbar i{display:block;height:100%;border-radius:99px;background:#7FB5A8}
+.hrow .hw{text-align:right;white-space:nowrap}
+
 .note{font-family:"IBM Plex Mono",monospace;font-size:11.5px;
   color:var(--ink-soft);margin-top:30px;line-height:1.65}
 .loading,.err{font-family:"IBM Plex Mono",monospace;font-size:13px;
@@ -102,7 +156,7 @@ main.wrap{padding-bottom:56px}
 .err{color:var(--laterite)}
 a{color:var(--laterite)}
 @media (prefers-reduced-motion:no-preference){
-  .spot{animation:rise .45s ease both}
+  .panel:not([hidden]){animation:rise .35s ease both}
   @keyframes rise{from{opacity:0;transform:translateY(8px)}
     to{opacity:1;transform:none}}
 }
@@ -129,24 +183,29 @@ a{color:var(--laterite)}
   </div>
 </header>
 
+<div class="tabbar">
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Surf spots"></nav>
+</div>
+
 <main class="wrap">
-  <div id="spots"></div>
+  <div id="panels"></div>
   <p class="note">Rules: <b>GO</b> = swell ≥1.2 m at ≥12 s from the SW window ·
   <b>OK</b> = rideable (≥0.8 m) · wind read 6–10 am IST, E/NE = offshore.<br>
+  Arrows point where the swell/wind is heading.
   Model: Open-Meteo global wave (~5 km). It nails swell arrival and period;
   it does not know the sandbar. Days 6–7 are hints — recheck Thursday.</p>
 </main>
 
 <script>
 // Sasihitlu + Hejamadi share an Open-Meteo grid cell, so they ride on one
-// card (one fetch) with both names. Coordinates are nudged ~1 km offshore
+// tab (one fetch) with both names. Coordinates are nudged ~1 km offshore
 // on purpose — do not "fix" them.
 const SPOTS = [
   { name: "Mulki — Sasihitlu rivermouth", also: "+ Hejamadi Kodi (north bank) — same model cell",
-    lat: 13.071, lon: 74.766 },
-  { name: "Padubidri (Blue Flag)", lat: 13.131, lon: 74.752 },
-  { name: "Udupi — Malpe", lat: 13.361, lon: 74.688 },
-  { name: "Kodi Bengre (Delta Point)", lat: 13.450, lon: 74.685 },
+    short: "Sasihitlu · Hejamadi", lat: 13.071, lon: 74.766 },
+  { name: "Padubidri (Blue Flag)", short: "Padubidri", lat: 13.131, lon: 74.752 },
+  { name: "Udupi — Malpe", short: "Malpe", lat: 13.361, lon: 74.688 },
+  { name: "Kodi Bengre (Delta Point)", short: "Kodi Bengre", lat: 13.450, lon: 74.685 },
 ];
 const GO_H = 1.2, GO_P = 12, OK_H = 0.8, DIR = [180, 280];
 const PTS = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW",
@@ -163,6 +222,12 @@ function score(h, p, dir, wKn, wDir) {
 }
 const windLabel = (kn, dir) => kn < 6 ? "light" :
   `${(dir <= 130 || dir >= 340) ? "offshore" : "onshore"} ${Math.round(kn)}kt`;
+const isOff = dir => dir <= 130 || dir >= 340;
+
+// Open-Meteo directions are "coming from"; the arrow points where it's going.
+const arrow = deg => `<svg class="arr" viewBox="0 0 24 24" aria-hidden="true"
+  style="transform:rotate(${Math.round(deg + 180) % 360}deg)">
+  <path d="M12 2.5l5.2 9h-3.4V21h-3.6v-9.5H6.8z"/></svg>`;
 
 async function getJSON(url) {
   const r = await fetch(url);
@@ -208,15 +273,12 @@ async function loadSpot(s) {
 
 const COLORS = { go: "#0E7C66", ok: "#C99A2E", small: "#AEC0BB" };
 
-function waveProfile(days) {
-  const W = 640, H = 110, base = H - 18, maxH = 3;
+function waveProfile(days, uid) {
+  const W = 640, H = 120, base = H - 18, maxH = 3;
+  const yFor = h => base - Math.min(h, maxH) / maxH * (base - 14);
   const colW = W / days.length;
   let bars = "", labels = "";
-  const pts = days.map((d, i) => {
-    const x = i * colW + colW / 2;
-    const y = base - Math.min(d.h, maxH) / maxH * (base - 14);
-    return [x, y, d];
-  });
+  const pts = days.map((d, i) => [i * colW + colW / 2, yFor(d.h), d]);
   let path = `M0 ${base} L${pts[0][0]} ${pts[0][1]} `;
   for (let i = 0; i < pts.length - 1; i++) {
     const [x1, y1] = pts[i], [x2, y2] = pts[i + 1];
@@ -226,21 +288,36 @@ function waveProfile(days) {
     .replace(/^L/, "M");
   path += `L${W} ${base} L${W} ${H} L0 ${H} Z`;
   pts.forEach(([x, y, d]) => {
-    bars += `<circle cx="${x}" cy="${y}" r="4.5" fill="${COLORS[d.cls]}"/>`;
+    bars += `<circle cx="${x}" cy="${y}" r="5" fill="${COLORS[d.cls]}"
+      stroke="#F7FAF8" stroke-width="1.5"/>`;
     const nm = new Date(d.day + "T00:00").toLocaleDateString("en-IN",
       { weekday: "short" });
     labels += `<text x="${x}" y="${H - 4}" text-anchor="middle"
       font-size="11" font-family="IBM Plex Mono,monospace"
       fill="#3E6463">${nm}</text>
-      <text x="${x}" y="${y - 10}" text-anchor="middle" font-size="10.5"
+      <text x="${x}" y="${y - 11}" text-anchor="middle" font-size="10.5"
       font-weight="600" font-family="IBM Plex Mono,monospace"
       fill="${COLORS[d.cls]}">${d.h.toFixed(1)}</text>`;
   });
+  const yGo = yFor(GO_H), yOk = yFor(OK_H);
   return `<svg class="profile" viewBox="0 0 ${W} ${H}"
-    role="img" aria-label="Swell height profile for the week, metres per day">
-    <path d="${path}" fill="#D5E6E0"/>
+    role="img" aria-label="Swell height profile for the week, metres per day,
+    with the 1.2 m go line and 0.8 m rideable line marked">
+    <defs><linearGradient id="g${uid}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9CCDC0"/>
+      <stop offset="1" stop-color="#D5E6E0" stop-opacity=".25"/>
+    </linearGradient></defs>
+    <path d="${path}" fill="url(#g${uid})"/>
     <path d="${crest}" fill="none" stroke="#8FB5AC" stroke-width="2"
       stroke-linecap="round"/>
+    <line x1="0" y1="${yGo}" x2="${W}" y2="${yGo}" stroke="#0E7C66"
+      stroke-width="1" stroke-dasharray="5 6" opacity=".6"/>
+    <text x="4" y="${yGo - 4}" font-size="9.5"
+      font-family="IBM Plex Mono,monospace" fill="#0E7C66">go ≥1.2</text>
+    <line x1="0" y1="${yOk}" x2="${W}" y2="${yOk}" stroke="#6B7A77"
+      stroke-width="1" stroke-dasharray="2 6" opacity=".5"/>
+    <text x="4" y="${yOk - 4}" font-size="9.5"
+      font-family="IBM Plex Mono,monospace" fill="#6B7A77">ok ≥0.8</text>
     <line x1="0" y1="${base}" x2="${W}" y2="${base}"
       stroke="#C9DAD5" stroke-width="1"/>${bars}${labels}</svg>`;
 }
@@ -248,23 +325,46 @@ function waveProfile(days) {
 function rowHTML(d) {
   const nm = new Date(d.day + "T00:00").toLocaleDateString("en-IN",
     { weekday: "short" });
+  const wcls = d.kn < 6 ? "" : isOff(d.wd) ? "off" : "on";
+  const wind = d.kn < 6 ? "light"
+    : `${arrow(d.wd)}${Math.round(d.kn)}kt`;
   return `<div class="row">
     <span class="d">${nm}</span>
-    <span class="stat">${d.h.toFixed(1)}m @ ${Math.round(d.p)}s ${compass(d.d)}</span>
-    <span class="wind">${windLabel(d.kn, d.wd)}</span>
+    <span class="hv">${d.h.toFixed(1)}<small>m</small></span>
+    <span class="pv">@${Math.round(d.p)}s</span>
+    <span class="dirv">${arrow(d.d)} ${compass(d.d)}</span>
+    <span class="windv ${wcls}" title="${windLabel(d.kn, d.wd)}">${wind}</span>
     <span class="badge b-${d.cls}">${d.label}</span></div>`;
 }
 
-const hourRow = h => `<div class="hrow">
-  <span class="hh">${String(h.hr).padStart(2, "0")}h</span>
-  <span>${h.h.toFixed(1)}m @ ${Math.round(h.p)}s</span>
-  <span>· wind ${Math.round(h.kn)}kt ${compass(h.wd)}</span></div>`;
+function hourRow(h, max) {
+  const pct = Math.round(Math.min(h.h / max, 1) * 100);
+  return `<div class="hrow">
+    <span class="hh">${String(h.hr).padStart(2, "0")}h</span>
+    <span class="hbar"><i style="width:${pct}%"></i></span>
+    <span>${h.h.toFixed(1)}m @ ${Math.round(h.p)}s</span>
+    <span class="hw">${arrow(h.wd)}${Math.round(h.kn)}kt ${compass(h.wd)}</span></div>`;
+}
 
-function cardHTML(s, { days, hours }) {
+function panelHTML(s, { days, hours }, uid) {
+  const t = days[0];
   const best = days.find(d => d.cls === "go");
+  const hMax = Math.max(...hours.map(x => x.h), 0.5) * 1.1;
   return `<h2>${s.name}${s.also ? `<span class="also">${s.also}</span>` : ""}</h2>
     <p class="coords">${s.lat.toFixed(3)}°N ${s.lon.toFixed(3)}°E</p>
-    ${waveProfile(days)}
+    <div class="now">
+      <p class="now-cap">today · max swell · 6–10am wind</p>
+      <div class="now-row">
+        <div class="now-big">${t.h.toFixed(1)}<small>m</small></div>
+        <div class="now-meta">
+          <span>@ ${Math.round(t.p)}s from ${compass(t.d)} ${arrow(t.d)}</span>
+          <span class="${t.kn >= 6 && isOff(t.wd) ? "off" : ""}">
+            ${windLabel(t.kn, t.wd)} ${t.kn < 6 ? "" : arrow(t.wd)}</span>
+        </div>
+        <span class="badge b-${t.cls} now-badge">${t.label}</span>
+      </div>
+    </div>
+    ${waveProfile(days, uid)}
     <div class="rows">${days.map(rowHTML).join("")}</div>
     <p class="best">${best
       ? `Best bet: <b>${new Date(best.day + "T00:00")
@@ -272,31 +372,77 @@ function cardHTML(s, { days, hours }) {
       : "No green days — longboard week or skip."}</p>
     ${hours.length ? `<details class="today">
       <summary>today · hour by hour</summary>
-      ${hours.map(hourRow).join("")}</details>` : ""}`;
+      ${hours.map(h => hourRow(h, hMax)).join("")}</details>` : ""}`;
+}
+
+const weekBest = days => days.some(d => d.cls === "go") ? "go"
+  : days.some(d => d.cls === "ok") ? "ok" : "small";
+
+let current = -1;
+function selectTab(i) {
+  document.querySelectorAll(".tab").forEach((t, j) => {
+    t.setAttribute("aria-selected", String(i === j));
+    t.tabIndex = i === j ? 0 : -1;
+  });
+  document.querySelectorAll(".panel").forEach((p, j) => { p.hidden = i !== j; });
+  current = i;
+  try { localStorage.setItem("swell.tab", i); } catch {}
 }
 
 async function main() {
-  const mount = document.getElementById("spots");
   document.getElementById("stamp").textContent =
     "live · " + new Date().toLocaleDateString("en-IN",
       { weekday: "long", day: "numeric", month: "short" });
-  const loads = SPOTS.map(s => {
-    const el = document.createElement("section");
-    el.className = "spot";
-    el.innerHTML = `<h2>${s.name}</h2>
+  const tabsEl = document.getElementById("tabs");
+  const mount = document.getElementById("panels");
+  const panels = SPOTS.map((s, i) => {
+    const tb = document.createElement("button");
+    tb.className = "tab";
+    tb.id = `tab-${i}`;
+    tb.setAttribute("role", "tab");
+    tb.setAttribute("aria-controls", `panel-${i}`);
+    tb.setAttribute("aria-selected", "false");
+    tb.tabIndex = -1;
+    tb.innerHTML = `<span class="tdot"></span>${s.short}`;
+    tb.addEventListener("click", () => selectTab(i));
+    tabsEl.appendChild(tb);
+    const p = document.createElement("section");
+    p.className = "panel";
+    p.id = `panel-${i}`;
+    p.setAttribute("role", "tabpanel");
+    p.setAttribute("aria-labelledby", `tab-${i}`);
+    p.hidden = true;
+    p.innerHTML = `<h2>${s.name}</h2>
       <p class="coords">${s.lat.toFixed(3)}°N ${s.lon.toFixed(3)}°E</p>
       <p class="loading">reading the swell…</p>`;
-    mount.appendChild(el);
-    return loadSpot(s).then(data => {
-      el.innerHTML = cardHTML(s, data);
+    mount.appendChild(p);
+    return p;
+  });
+  let stored = 0;
+  try { stored = Math.min(+localStorage.getItem("swell.tab") || 0, SPOTS.length - 1); } catch {}
+  selectTab(stored);
+  tabsEl.addEventListener("keydown", e => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const n = SPOTS.length;
+    const ni = (current + (e.key === "ArrowRight" ? 1 : -1) + n) % n;
+    selectTab(ni);
+    document.getElementById(`tab-${ni}`).focus();
+  });
+  const setDot = (i, cls) => {
+    document.querySelector(`#tab-${i} .tdot`).className = `tdot ${cls}`;
+  };
+  const results = await Promise.all(SPOTS.map((s, i) =>
+    loadSpot(s).then(data => {
+      panels[i].innerHTML = panelHTML(s, data, i);
+      setDot(i, weekBest(data.days));
       return data;
     }).catch(e => {
-      el.querySelector(".loading").outerHTML =
+      const l = panels[i].querySelector(".loading");
+      if (l) l.outerHTML =
         `<p class="err">Couldn't reach the forecast (${e.message}). Pull to refresh.</p>`;
+      setDot(i, "err");
       return null;
-    });
-  });
-  const results = await Promise.all(loads);
+    })));
   const goDays = new Set();
   results.forEach(r => r && r.days.forEach(d => d.cls === "go" && goDays.add(d.day)));
   const v = document.getElementById("verdict");
