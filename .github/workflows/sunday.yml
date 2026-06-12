@@ -1,0 +1,38 @@
+name: Sunday surf alert
+
+on:
+  schedule:
+    - cron: "30 1 * * 0"   # 01:30 UTC Sunday = 7:00 AM IST Sunday
+  workflow_dispatch: {}     # manual "Run workflow" button for testing
+
+jobs:
+  alert:
+    runs-on: ubuntu-latest
+    steps:
+      # Telegram is optional: if the secrets aren't configured the run
+      # ends quietly green instead of failing every Sunday.
+      - name: Check Telegram secrets
+        id: tg
+        env:
+          TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -n "$TOKEN" ] && [ -n "$CHAT" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Telegram secrets not set — skipping."
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.tg.outputs.ok == 'true'
+      - uses: actions/setup-python@v5
+        if: steps.tg.outputs.ok == 'true'
+        with:
+          python-version: "3.12"
+      - if: steps.tg.outputs.ok == 'true'
+        run: pip install requests
+      - if: steps.tg.outputs.ok == 'true'
+        run: python surf_alert.py
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

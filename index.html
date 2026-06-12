@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swell Check — Mulki · Udupi</title>
+<meta name="description" content="Live 7-day surf outlook for coastal Karnataka — Sasihitlu to Kodi Bengre. Worth the drive this week?">
+<meta name="theme-color" content="#082523">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --foam:#ECF3F0; --ink:#0F3B3A; --ink-soft:#3E6463; --line:#C9DAD5;
+  --laterite:#BF4B26; --coral:#FF9B6B;
+  --go:#0E7C66; --go-bg:#D8EEE6;
+  --ok:#9A6A0B; --ok-bg:#F4E8C8; --small:#6B7A77; --small-bg:#DFE7E4;
+  --card:#F7FAF8; --deep:#082523; --deep-2:#0E3A38;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--foam);color:var(--ink);
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+
+/* ── hero ─────────────────────────────────────────────── */
+.hero{background:linear-gradient(165deg,var(--deep-2),var(--deep) 70%);
+  color:#F2F8F5;position:relative;overflow:hidden}
+.hero .wrap{padding:34px 16px 96px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;
+  letter-spacing:.14em;color:var(--coral);text-transform:uppercase}
+h1{font-size:clamp(34px,10vw,58px);font-weight:800;line-height:.98;
+  letter-spacing:-.02em;margin:10px 0 12px;max-width:11ch}
+.sub{font-family:"IBM Plex Mono",monospace;font-size:12.5px;
+  color:rgba(242,248,245,.72)}
+.verdict{display:inline-flex;align-items:center;gap:7px;margin-top:12px;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;
+  color:#F2F8F5;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.18);
+  padding:5px 12px;border-radius:99px}
+.verdict .dot{width:8px;height:8px;border-radius:50%;background:#5fd0b2;
+  flex:none}
+.verdict.flat .dot{background:#9fb4af}
+.verdict:empty{display:none}
+
+/* drifting foam waves on the hero's lower edge */
+.waves{position:absolute;left:0;right:0;bottom:-1px;height:60px;
+  pointer-events:none}
+.wtrack{position:absolute;left:0;bottom:0;width:200%;height:100%;
+  display:flex}
+.wtrack svg{width:50%;height:100%;flex:none;display:block}
+.wtrack svg:first-child{margin-right:-1px} /* hide the seam between copies */
+.w1{bottom:14px;opacity:.32;animation:drift 28s linear infinite}
+.w2{animation:drift 17s linear infinite reverse}
+@keyframes drift{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  .w1,.w2{animation:none}
+  .w1{transform:translateX(-21%)}
+}
+
+/* ── spot cards ───────────────────────────────────────── */
+main.wrap{padding-bottom:56px}
+.spot{background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:18px 18px 14px;margin-top:22px}
+.spot h2{font-size:22px;font-weight:800;letter-spacing:-.01em;line-height:1.1}
+.also{display:block;font-size:14px;font-weight:600;color:var(--ink-soft);
+  margin-top:3px}
+.coords{font-family:"IBM Plex Mono",monospace;font-size:11px;
+  color:var(--ink-soft);margin-top:4px}
+.profile{margin:14px 0 6px;display:block;width:100%}
+.rows{border-top:1px solid var(--line)}
+.row{display:flex;align-items:baseline;gap:8px;padding:9px 2px;
+  border-bottom:1px solid var(--line);
+  font-family:"IBM Plex Mono",monospace;font-size:13px}
+.row .d{width:36px;font-weight:600}
+.row .stat{flex:1;min-width:0;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.row .stat::before,.row .wind::before{content:"· ";color:var(--line)}
+.row .wind{color:var(--ink-soft);font-size:12px;white-space:nowrap}
+.badge{font-family:"IBM Plex Mono",monospace;font-size:11px;
+  font-weight:600;padding:2px 9px;border-radius:99px;white-space:nowrap}
+.b-go{background:var(--go-bg);color:var(--go)}
+.b-ok{background:var(--ok-bg);color:var(--ok)}
+.b-small{background:var(--small-bg);color:var(--small)}
+.best{font-size:15px;margin-top:12px}
+.best b{color:var(--go)}
+.today{margin-top:10px;font-family:"IBM Plex Mono",monospace;font-size:12px}
+.today summary{cursor:pointer;color:var(--laterite);font-weight:500;
+  letter-spacing:.03em;padding:4px 0;user-select:none}
+.hrow{display:flex;gap:8px;padding:5px 2px;color:var(--ink-soft);
+  border-bottom:1px dashed var(--line)}
+.hrow .hh{width:34px;color:var(--ink);font-weight:500}
+.note{font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+  color:var(--ink-soft);margin-top:30px;line-height:1.65}
+.loading,.err{font-family:"IBM Plex Mono",monospace;font-size:13px;
+  color:var(--ink-soft);padding:14px 0}
+.err{color:var(--laterite)}
+a{color:var(--laterite)}
+@media (prefers-reduced-motion:no-preference){
+  .spot{animation:rise .45s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}
+    to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Arabian Sea · 7-day swell check</p>
+    <h1>Worth the drive this week?</h1>
+    <p class="sub" id="stamp">fetching live forecast…</p>
+    <p class="verdict" id="verdict"></p>
+  </div>
+  <div class="waves" aria-hidden="true">
+    <div class="wtrack w1">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#ECF3F0" d="M0 30 Q90 60 180 30 T360 30 T540 30 T720 30 T900 30 T1080 30 T1260 30 T1440 30 V60 H0 Z"/></svg>
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#ECF3F0" d="M0 30 Q90 60 180 30 T360 30 T540 30 T720 30 T900 30 T1080 30 T1260 30 T1440 30 V60 H0 Z"/></svg>
+    </div>
+    <div class="wtrack w2">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#ECF3F0" d="M0 30 Q90 60 180 30 T360 30 T540 30 T720 30 T900 30 T1080 30 T1260 30 T1440 30 V60 H0 Z"/></svg>
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#ECF3F0" d="M0 30 Q90 60 180 30 T360 30 T540 30 T720 30 T900 30 T1080 30 T1260 30 T1440 30 V60 H0 Z"/></svg>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="spots"></div>
+  <p class="note">Rules: <b>GO</b> = swell ≥1.2 m at ≥12 s from the SW window ·
+  <b>OK</b> = rideable (≥0.8 m) · wind read 6–10 am IST, E/NE = offshore.<br>
+  Model: Open-Meteo global wave (~5 km). It nails swell arrival and period;
+  it does not know the sandbar. Days 6–7 are hints — recheck Thursday.</p>
+</main>
+
+<script>
+// Sasihitlu + Hejamadi share an Open-Meteo grid cell, so they ride on one
+// card (one fetch) with both names. Coordinates are nudged ~1 km offshore
+// on purpose — do not "fix" them.
+const SPOTS = [
+  { name: "Mulki — Sasihitlu rivermouth", also: "+ Hejamadi Kodi (north bank) — same model cell",
+    lat: 13.071, lon: 74.766 },
+  { name: "Padubidri (Blue Flag)", lat: 13.131, lon: 74.752 },
+  { name: "Udupi — Malpe", lat: 13.361, lon: 74.688 },
+  { name: "Kodi Bengre (Delta Point)", lat: 13.450, lon: 74.685 },
+];
+const GO_H = 1.2, GO_P = 12, OK_H = 0.8, DIR = [180, 280];
+const PTS = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW",
+             "WSW","W","WNW","NW","NNW"];
+const compass = d => PTS[Math.floor(((d + 11.25) % 360) / 22.5)];
+
+function score(h, p, dir, wKn, wDir) {
+  const inWin = dir >= DIR[0] && dir <= DIR[1];
+  const calm = wKn < 8 || wDir <= 130 || wDir >= 340;
+  if (h >= GO_H && p >= GO_P && inWin)
+    return calm ? ["GO", "go"] : ["OK", "ok"];
+  if (h >= OK_H && inWin) return ["OK", "ok"];
+  return ["SMALL", "small"];
+}
+const windLabel = (kn, dir) => kn < 6 ? "light" :
+  `${(dir <= 130 || dir >= 340) ? "offshore" : "onshore"} ${Math.round(kn)}kt`;
+
+async function getJSON(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  return r.json();
+}
+
+async function loadSpot(s) {
+  const q = `latitude=${s.lat}&longitude=${s.lon}&timezone=Asia%2FKolkata&forecast_days=7`;
+  const [m, w] = await Promise.all([
+    getJSON(`https://marine-api.open-meteo.com/v1/marine?${q}&daily=swell_wave_height_max,swell_wave_period_max,swell_wave_direction_dominant&hourly=swell_wave_height,swell_wave_period`),
+    getJSON(`https://api.open-meteo.com/v1/forecast?${q}&hourly=wind_speed_10m,wind_direction_10m&wind_speed_unit=kn`),
+  ]);
+  const windAt = {}, morning = {};
+  w.hourly.time.forEach((t, i) => {
+    const kn = w.hourly.wind_speed_10m[i] ?? 0;
+    const wd = w.hourly.wind_direction_10m[i] ?? 0;
+    windAt[t] = [kn, wd];
+    const day = t.slice(0, 10), hr = +t.slice(11, 13);
+    if (hr >= 6 && hr <= 10) (morning[day] ||= []).push([kn, wd]);
+  });
+  const days = m.daily.time.map((day, i) => {
+    const ws = morning[day] || [[0, 0]];
+    const kn = ws.reduce((a, x) => a + x[0], 0) / ws.length;
+    const wd = ws.reduce((a, x) => a + x[1], 0) / ws.length;
+    const h = m.daily.swell_wave_height_max[i] ?? 0;
+    const p = m.daily.swell_wave_period_max[i] ?? 0;
+    const d = m.daily.swell_wave_direction_dominant[i] ?? 0;
+    const [label, cls] = score(h, p, d, kn, wd);
+    return { day, h, p, d, kn, wd, label, cls };
+  });
+  const today = m.daily.time[0], hours = [];
+  (m.hourly?.time || []).forEach((t, i) => {
+    if (t.slice(0, 10) !== today) return;
+    const hr = +t.slice(11, 13);
+    if (hr < 5 || hr > 19) return;
+    const [kn, wd] = windAt[t] || [0, 0];
+    hours.push({ hr, h: m.hourly.swell_wave_height[i] ?? 0,
+                 p: m.hourly.swell_wave_period[i] ?? 0, kn, wd });
+  });
+  return { days, hours };
+}
+
+const COLORS = { go: "#0E7C66", ok: "#C99A2E", small: "#AEC0BB" };
+
+function waveProfile(days) {
+  const W = 640, H = 110, base = H - 18, maxH = 3;
+  const colW = W / days.length;
+  let bars = "", labels = "";
+  const pts = days.map((d, i) => {
+    const x = i * colW + colW / 2;
+    const y = base - Math.min(d.h, maxH) / maxH * (base - 14);
+    return [x, y, d];
+  });
+  let path = `M0 ${base} L${pts[0][0]} ${pts[0][1]} `;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const [x1, y1] = pts[i], [x2, y2] = pts[i + 1];
+    path += `C${(x1 + x2) / 2} ${y1} ${(x1 + x2) / 2} ${y2} ${x2} ${y2} `;
+  }
+  const crest = path.replace(/^M0 \d+(\.\d+)? /, `M${pts[0][0]} ${pts[0][1]} `)
+    .replace(/^L/, "M");
+  path += `L${W} ${base} L${W} ${H} L0 ${H} Z`;
+  pts.forEach(([x, y, d]) => {
+    bars += `<circle cx="${x}" cy="${y}" r="4.5" fill="${COLORS[d.cls]}"/>`;
+    const nm = new Date(d.day + "T00:00").toLocaleDateString("en-IN",
+      { weekday: "short" });
+    labels += `<text x="${x}" y="${H - 4}" text-anchor="middle"
+      font-size="11" font-family="IBM Plex Mono,monospace"
+      fill="#3E6463">${nm}</text>
+      <text x="${x}" y="${y - 10}" text-anchor="middle" font-size="10.5"
+      font-weight="600" font-family="IBM Plex Mono,monospace"
+      fill="${COLORS[d.cls]}">${d.h.toFixed(1)}</text>`;
+  });
+  return `<svg class="profile" viewBox="0 0 ${W} ${H}"
+    role="img" aria-label="Swell height profile for the week, metres per day">
+    <path d="${path}" fill="#D5E6E0"/>
+    <path d="${crest}" fill="none" stroke="#8FB5AC" stroke-width="2"
+      stroke-linecap="round"/>
+    <line x1="0" y1="${base}" x2="${W}" y2="${base}"
+      stroke="#C9DAD5" stroke-width="1"/>${bars}${labels}</svg>`;
+}
+
+function rowHTML(d) {
+  const nm = new Date(d.day + "T00:00").toLocaleDateString("en-IN",
+    { weekday: "short" });
+  return `<div class="row">
+    <span class="d">${nm}</span>
+    <span class="stat">${d.h.toFixed(1)}m @ ${Math.round(d.p)}s ${compass(d.d)}</span>
+    <span class="wind">${windLabel(d.kn, d.wd)}</span>
+    <span class="badge b-${d.cls}">${d.label}</span></div>`;
+}
+
+const hourRow = h => `<div class="hrow">
+  <span class="hh">${String(h.hr).padStart(2, "0")}h</span>
+  <span>${h.h.toFixed(1)}m @ ${Math.round(h.p)}s</span>
+  <span>· wind ${Math.round(h.kn)}kt ${compass(h.wd)}</span></div>`;
+
+function cardHTML(s, { days, hours }) {
+  const best = days.find(d => d.cls === "go");
+  return `<h2>${s.name}${s.also ? `<span class="also">${s.also}</span>` : ""}</h2>
+    <p class="coords">${s.lat.toFixed(3)}°N ${s.lon.toFixed(3)}°E</p>
+    ${waveProfile(days)}
+    <div class="rows">${days.map(rowHTML).join("")}</div>
+    <p class="best">${best
+      ? `Best bet: <b>${new Date(best.day + "T00:00")
+          .toLocaleDateString("en-IN", { weekday: "long" })}</b> — dawn patrol it. 🏄`
+      : "No green days — longboard week or skip."}</p>
+    ${hours.length ? `<details class="today">
+      <summary>today · hour by hour</summary>
+      ${hours.map(hourRow).join("")}</details>` : ""}`;
+}
+
+async function main() {
+  const mount = document.getElementById("spots");
+  document.getElementById("stamp").textContent =
+    "live · " + new Date().toLocaleDateString("en-IN",
+      { weekday: "long", day: "numeric", month: "short" });
+  const loads = SPOTS.map(s => {
+    const el = document.createElement("section");
+    el.className = "spot";
+    el.innerHTML = `<h2>${s.name}</h2>
+      <p class="coords">${s.lat.toFixed(3)}°N ${s.lon.toFixed(3)}°E</p>
+      <p class="loading">reading the swell…</p>`;
+    mount.appendChild(el);
+    return loadSpot(s).then(data => {
+      el.innerHTML = cardHTML(s, data);
+      return data;
+    }).catch(e => {
+      el.querySelector(".loading").outerHTML =
+        `<p class="err">Couldn't reach the forecast (${e.message}). Pull to refresh.</p>`;
+      return null;
+    });
+  });
+  const results = await Promise.all(loads);
+  const goDays = new Set();
+  results.forEach(r => r && r.days.forEach(d => d.cls === "go" && goDays.add(d.day)));
+  const v = document.getElementById("verdict");
+  if (results.every(r => !r)) return;
+  v.classList.toggle("flat", !goDays.size);
+  v.innerHTML = `<span class="dot"></span>${goDays.size
+    ? `${goDays.size} green day${goDays.size > 1 ? "s" : ""} on the radar`
+    : "no green days — longboard energy"}`;
+}
+main();
+</script>
+</body>
+</html>
