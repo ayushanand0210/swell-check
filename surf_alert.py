@@ -116,7 +116,8 @@ def build_report():
                 f" \u00b7 {note}")
             if badge.endswith("GO") and best is None:
                 best = dayname
-        lines.append(f"_Best bet: {best or 'none \u2014 longboard week'}_")
+        fallback = "none \u2014 longboard week"
+        lines.append(f"_Best bet: {best or fallback}_")
         lines.append("")
     lines.append("_Model: Open-Meteo global wave \u2014 doesn't know the "
                   "sandbar. Recheck Thu._")
